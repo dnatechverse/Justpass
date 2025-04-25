@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: generalregular;
+    src: url('./assets/fonts/general/GeneralSans-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: unboundedbold;
+    src: url('./assets/fonts/unbounded/Unbounded-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: authormedium;
+    src: url('./assets/fonts/author/Author-Regular.otf') format('opentype');
+}
+
+@theme {
+    --color-grey: #f4f5f7;
+    --color-white: #ffffff;
+    --color-black: #131c15;
+
+    --font-generalregular: 'generalregular', sans-serif;
+    --font-unboundedbold: 'unboundedbold', sans-serif;
+    --font-authormedium: 'authormedium', sans-serif;
+}
+

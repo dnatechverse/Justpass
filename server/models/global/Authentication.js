@@ -10,7 +10,7 @@ const Register = new mongoose.Schema({
     collegeAddress: { type: String, required: true },
     degree: { type: String, required: true },
     department: { type: String, required: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: false },
     role: {
         type: String,
         enum: ["admin", "employee", "student"],

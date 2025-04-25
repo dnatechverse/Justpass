@@ -1,7 +1,9 @@
-const NumberVerification = require('./global/NumberVerification');
-const Authentication = require('./global/Authentication');
+const { getAuthData, getUserNameByEmail, registerUser, signinUser, updateUserProfile } = require('./global/Authentication');
 
 module.exports = { 
-    NumberVerification,
-    Authentication
+    getAuthData,
+    getUserNameByEmail,
+    registerUser,
+    signinUser,
+    updateUserProfile
 };

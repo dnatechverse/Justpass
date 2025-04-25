@@ -24,6 +24,7 @@ exports.registerUser = async (req, res) => {
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log('Hashed Password:', hashedPassword);  // Add this log
 
     // Assign role based on email match
     const adminEmail = process.env.ADMIN_MAIL;
@@ -39,7 +40,7 @@ exports.registerUser = async (req, res) => {
       collegeAddress,
       degree,
       department,
-      password: hashedPassword,
+      password,
       role,
     });
 
@@ -108,6 +109,8 @@ exports.signinUser = async (req, res) => {
     // Compare the provided password with the stored hashed password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
+      console.log('Comming Pass :', password);
+      console.log('Stored Pass :', user.password);
       return res.status(401).json({ message: 'Invalid password' });
     }
 

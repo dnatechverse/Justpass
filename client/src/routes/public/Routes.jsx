@@ -6,8 +6,8 @@ import { PublicLayout } from '../../layouts'
 const PublicRoutes = () => {
     return (
         <Routes>
-            <Route index element={<PublicHome />} />
             <Route path="/" element={<PublicLayout />}>
+                <Route index element={<PublicHome />} />
                 <Route path="about" element={<PublicAbout />} />
                 <Route path="contact" element={<PublicContact />} />
                 {/* <Route path="*" element={<NotFound />} /> */}

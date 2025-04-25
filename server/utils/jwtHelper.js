@@ -6,13 +6,14 @@ const sendToken = (user, statusCode, res) => {
     id: user._id,
     name: user.name,
     email: user.email,
-    phone: user.phone,
-    dob: user.dob,
-    gender: user.gender,    
+    phoneNo: user.phoneNo,
+    collegeName: user.collegeName,
+    collegeAddress: user.collegeAddress,
+    degree: user.degree,
+    department: user.department,
     role: user.role,
-    position: user.position,
-    img: user.img,
   };
+
 
   // Generate the token
   const token = jwt.sign(payload, process.env.JWT_SECRET || "defaultSecretKey", { expiresIn: '30d' });
