@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { API_URL } from '../../utils'
 
 const SignIN = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const API_URL = import.meta.env.VITE_API_URL
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            const res = await fetch(`${API_URL}/api/users/signin`, {
+            const res = await fetch(`${API_URL}/api/public/signin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

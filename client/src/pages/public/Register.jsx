@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { API_URL } from '../../utils'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Register = () => {
+    const API_URL = import.meta.env.VITE_API_URL
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -20,9 +21,10 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        console.log(formData)
+        console.log(API_URL)
         try {
-            const res = await fetch(`${API_URL}/api/users/register`, {
+            const res = await fetch(`${API_URL}/api/public/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -45,7 +47,7 @@ const Register = () => {
                     password: ''
                 })
                 alert('Registration successful!')
-
+                navigate('/')  // Redirect to sign-in page
                 // Optionally navigate to dashboard or login
             } else {
                 alert(data.message || 'Registration failed')
