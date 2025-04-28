@@ -12,7 +12,7 @@ const Layout = () => {
                     <Outlet />
                 </div>
             </div>
-            <div className='h-60' ></div>
+            <div className='h-76 md:h-60' ></div>
             <PublicFooter />
         </div>
     )

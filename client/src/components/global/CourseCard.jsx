@@ -7,7 +7,7 @@ const CourseCard = ({ Data }) => {
     return (
         Data && Data.length > 0 ? (
             Data.map((course, index) => (
-                <div key={index} className='w-full max-w-1/4 relative h-full bg-grey group transition-all duration-500 rounded-4xl shadow-md p-2'>
+                <div key={index} className='w-full w-full md:max-w-1/4 relative h-full bg-grey group transition-all duration-500 rounded-4xl shadow-md p-2'>
                     <div className=' w-full h-full rounded-3xl overflow-hidden mb-4' >
                         <img src={course.img} alt={course.title} className='  w-full object-cover  group-hover:scale-105 transition-all duration-500 ' />
                     </div>

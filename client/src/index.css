@@ -29,3 +29,24 @@
     border-radius: 50%;
     clip-path: polygon(0% 0%, 50% 100%, 100% 0%, 100% 100%, 100% );
   }
+
+  .icon.menu div:nth-child(1) {
+    transform: translateY(0) rotate(0);
+  }
+  /* .icon.menu div:nth-child(2) {
+    opacity: 1;
+  } */
+  .icon.menu div:nth-child(2) {
+    transform: translateY(0) rotate(0);
+  }
+  
+  .icon.close div:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+  }
+  /* .icon.close div:nth-child(2) {
+    opacity: 0;
+  } */
+  .icon.close div:nth-child(2) {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+  
