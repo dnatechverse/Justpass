@@ -65,10 +65,10 @@ const Register = () => {
 
 
     return (
-        <div className="min-h-screen flex  justify-center ">
-            <div className="bg-white p-8 rounded-2xl shadow-xl w-full ">
+        <div className="min-h-full flex  justify-center w-full">
+            <div className="md:bg-white md:w-3/5 md:p-8 rounded-2xl md:shadow-xl w-full mt-4 md:mt-0 ">
                 <h2 className="text-4xl font-unboundedbold mb-6 text-center">Register</h2>
-                <form className="grid grid-cols-1 md:grid-cols-2 gap-6 font-generalregular " onSubmit={handleSubmit}>
+                <form className="grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-6 font-generalregular " onSubmit={handleSubmit}>
                     <input type="text" name="name" placeholder="Full Name" required className={inputStyle} onChange={handleChange} value={formData.name} />
                     <input type="email" name="email" placeholder="Email" required className={inputStyle} onChange={handleChange} value={formData.email} />
                     <input type="text" name="phoneNo" placeholder="Phone Number" required className={inputStyle} onChange={handleChange} value={formData.phoneNo} />

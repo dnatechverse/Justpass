@@ -44,31 +44,31 @@ const SignIN = () => {
 
     return (
         <div className=" flex items-center justify-center  w-full h-full">
-            <div className="bg-white p-8 rounded-2xl shadow-xl  w-2/5 ">
+            <div className="md:bg-white md:p-8 rounded-2xl md:shadow-xl w-full mt-4 md:mt-0  md:w-2/5 ">
                 <h2 className="text-4xl font-unboundedbold mb-6 text-center">Sign In</h2>
                 <form className="flex flex-col space-y-5 font-generalregular" onSubmit={handleSubmit}>
                     <div>
-                        <label className="block text-lg mb-1">Email</label>
+                        <label className="block text-sm md:text-lg md:mb-1">Email</label>
                         <input
                             type="email"
                             name="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="you@example.com"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                            className="w-full p-3 border border-gray-300 text-sm md:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                             required
                         />
                     </div>
 
                     <div>
-                        <label className="block text-lg mb-1">Password</label>
+                        <label className="block text-sm md:text-lg md:mb-1">Password</label>
                         <input
                             type="password"
                             name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Your password"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                            className="w-full p-3 border border-gray-300 text-sm md:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                             required
                         />
                     </div>

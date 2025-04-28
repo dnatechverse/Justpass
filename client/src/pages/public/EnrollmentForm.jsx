@@ -79,11 +79,24 @@ const EnrollmentForm = () => {
         }
     };
 
+      useEffect(() => {
+            if (showPopup) {
+                document.body.style.overflow = 'hidden'; // Disable scroll
+            } else {
+                document.body.style.overflow = 'auto';   // Enable scroll
+            }
+            
+            // Clean up when component unmounts
+            return () => {
+                document.body.style.overflow = 'auto';
+            };
+        }, [showPopup]);
+
     return (
-        <div className="max-w-2/5 mx-auto  p-8 px-12 bg-white shadow-md rounded-4xl">
+        <div className="md:max-w-2/5 mx-auto mt-6 md:mt-0 md:p-8 md:px-12 md:bg-white md:shadow-md rounded-4xl  w-full">
             {showPopup &&  <EnrollmentPopup /> }
             <h2 className="text-4xl font-unboundedbold font-bold mb-6 text-center">Enrollment Form</h2>
-            <form onSubmit={handleSubmit} className="space-y-5 font-generalregular">
+            <form onSubmit={handleSubmit} className="space-y-5 text-sm md:text-lg font-generalregular">
                 {/* Full Name */}
                 <div>
                     <label className="block mb-1" htmlFor="name">Full Name</label>

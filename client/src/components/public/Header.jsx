@@ -54,6 +54,18 @@ const Header = () => {
                             ))
                         }
                     </div>
+                    {
+                        user ? (
+                            <div className='left-1/2 -translate-x-1/2 absolute bottom-6  ' >
+                                <Link to="/user/dashboard/enrolled-course" className='px-5 py-3 rounded-full bg-black text-white text-sm ' >{user?.name}</Link>
+                            </div>
+                        ) : (
+                            <div className='left-1/2 -translate-x-1/2 absolute bottom-4  ' >
+                                <Link to="/signin"  className='px-5 py-3 rounded-full bg-black text-white text-sm ' >Register</Link>
+                                
+                            </div>
+                        )
+                    }
                 </div>
                 <div>
                     <div className='md:flex gap-6 text-base hidden '>

@@ -35,10 +35,10 @@ const Courses = () => {
     }).filter(course => course); // remove undefined if no match found
 
     return (
-        <div>
+        <div className=' ' >
             <div>
                 <div className='flex justify-between items-center ' >
-                    <h1 className="text-4xl font-unboundedbold mb-6">{matchedCourses.length > 0 ? " Enrolled Course" : "No Courses Enrolled Yet"}</h1>
+                    <h1 className="text-2xl text-center md:text-start md:text-4xl font-unboundedbold md:mb-6">{matchedCourses.length > 0 ? " Enrolled Course" : "No Courses Enrolled Yet"}</h1>
 
                 </div>
                 <div>
@@ -82,15 +82,15 @@ const Courses = () => {
                                     ))}
                                 </div>
                             ) : (
-                                <div className="text-center py-4 flex flex-col items-center  max-h-[460px] rounded-3xl  overflow-hidden ">
-                                    <img src={images.EmptyEnrollment} className='w-3/5 rounded-4xl ' alt="" srcset="" />
-                                    <div className='relative -mt-40 overflow-hidden   w-full h-full min-h-80 ' >
-                                        <div className="absolute w-full  h-full bg-white pointed-ellipse left-0 z-0  "></div>
+                                <div className="text-center py-4 flex flex-col items-center  md:max-h-[460px] rounded-3xl  md:overflow-hidden ">
+                                    <img src={images.EmptyEnrollment} className='  md:w-3/5 rounded-4xl ' alt="" srcset="" />
+                                    <div className='relative md:-mt-40 md:overflow-hidden   w-full h-full md:min-h-80 ' >
+                                        <div className="absolute w-full hidden md:block  h-full bg-white pointed-ellipse left-0 z-0  "></div>
                                         <div className='relative font-authormedium  w-full flex items-center flex-col   ' >
-                                            <div className="text-lg mt-12  text-black absolute z-10 max-w-2/5  mx-auto space-y-6">
+                                            <div className="text-lg mt-3 md:mt-12  text-black md:absolute z-10 md:max-w-2/5  mx-auto space-y-6">
                                                 <div>It looks like you haven't enrolled in any courses yet.
                                                 Explore our available courses and start your learning journey today!</div>
-                                                <Link to="/" className="bg-black text-white px-6 py-4 rounded-2xl  transition duration-300 text-xl  hover:scale-105   ">Explore Courses</Link>
+                                                <Link to="/" className="bg-black text-white px-6 py-4 rounded-2xl  transition duration-300 text-sm md:text-xl  hover:scale-105   ">Explore Courses</Link>
                                             </div>
                                         </div>
                                     </div>
