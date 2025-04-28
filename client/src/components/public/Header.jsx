@@ -19,7 +19,7 @@ const Header = () => {
         } else {
             document.body.style.overflow = 'auto';   // Enable scroll
         }
-        
+
         // Clean up when component unmounts
         return () => {
             document.body.style.overflow = 'auto';
@@ -44,28 +44,33 @@ const Header = () => {
                 </div>
                 <div className={`absolute z-10 bg-[#00000010] md:hidden backdrop-blur-md w-screen transition-all duration-500 h-screen ${openMenu ? "left-0" : "-left-[100%]"}  top-0 `} >
                     <div className='flex flex-col items-center text-xl justify-center h-full gap-10 ' >
-                        {
-                            PublicHeaderNavigation.map((Data, index) => (
-                                <div key={index} onClick={toggleMenu} >
-                                    <Link to={Data.link}>
-                                        <div>{Data.name}</div>
-                                    </Link>
-                                </div>
-                            ))
-                        }
+                        <div className='flex flex-col gap-10 text-center' >
+                            {
+                                PublicHeaderNavigation.map((Data, index) => (
+                                    <div key={index} onClick={toggleMenu} >
+                                        <Link to={Data.link}>
+                                            <div>{Data.name}</div>
+                                        </Link>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div>
+
+                            {
+                                user ? (
+                                    <div className=' ' >
+                                        <Link to="/user/dashboard/enrolled-course" className='px-5 py-3 rounded-full bg-black text-white text-sm ' >{user?.name}</Link>
+                                    </div>
+                                ) : (
+                                    <div className=' ' >
+                                        <Link to="/signin" className='px-5 py-3 rounded-full bg-black text-white text-sm ' >Register</Link>
+
+                                    </div>
+                                )
+                            }
+                        </div>
                     </div>
-                    {
-                        user ? (
-                            <div className='left-1/2 -translate-x-1/2 absolute bottom-6  ' >
-                                <Link to="/user/dashboard/enrolled-course" className='px-5 py-3 rounded-full bg-black text-white text-sm ' >{user?.name}</Link>
-                            </div>
-                        ) : (
-                            <div className='left-1/2 -translate-x-1/2 absolute bottom-4  ' >
-                                <Link to="/signin"  className='px-5 py-3 rounded-full bg-black text-white text-sm ' >Register</Link>
-                                
-                            </div>
-                        )
-                    }
                 </div>
                 <div>
                     <div className='md:flex gap-6 text-base hidden '>
