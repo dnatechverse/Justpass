@@ -25,3 +25,7 @@
     --font-authormedium: 'authormedium', sans-serif;
 }
 
+.pointed-ellipse {
+    border-radius: 50%;
+    clip-path: polygon(0% 0%, 50% 100%, 100% 0%, 100% 100%, 100% );
+  }

@@ -5,8 +5,14 @@ import WebDeveloper from "./public/courses/PersoninYellowPufferJacketwithRedHead
 import DataAnalyst from "./public/courses/PersoninFuturisticWorkspace.jpeg"
 import AppDevelopment from "./public/courses/FocusedDataAnalyst.jpeg"
 
+import EnrollmentUser from "./public/enrollment/HarmonyandContrast.jpeg"
+
+import EmptyEnrollment from "./user/enrollment/VibrantStadiumatDawn.jpg" 
+
 export default {
     GradientGirl, AboutTeam,
 
     WebDeveloper, DataAnalyst, AppDevelopment,
+
+    EnrollmentUser, EmptyEnrollment,
 }

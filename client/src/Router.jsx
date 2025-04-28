@@ -1,10 +1,11 @@
 import React from 'react'
-import { PublicRoutes } from './routes'
+import { PublicRoutes, UserRoutes } from './routes'
 
 const Router = () => {
     return (
         <div>
             <PublicRoutes />
+            <UserRoutes />
         </div>
     )
 }

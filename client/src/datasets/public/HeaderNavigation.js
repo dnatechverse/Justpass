@@ -4,21 +4,21 @@ const HeaderNavigation = [
         link: '/',
     },
     {
-        name: 'About',
-        link: '/about',
+        name: 'Why choose us',
+        link: '/about', 
     },
     {
         name: 'Contact',
         link: '/contact',
     },
-    {
-        name: 'Services',
-        link: '/services',
-    },
-    {
-        name: 'Blog',
-        link: '/blog',
-    },
+    // {
+    //     name: 'Services',
+    //     link: '/services',
+    // },
+    // {
+    //     name: 'Blog',
+    //     link: '/blog',
+    // },
 ]
 
 export default HeaderNavigation

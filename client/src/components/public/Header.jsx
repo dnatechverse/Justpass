@@ -32,7 +32,7 @@ const Header = () => {
                     {
                         user ? (
                             <div>
-                                <Link to="/dashboard" className='px-5 py-3 rounded-full bg-black text-white text-sm ' >{user?.name}</Link>
+                                <Link to="/user/dashboard/enrolled-course" className='px-5 py-3 rounded-full bg-black text-white text-sm ' >{user?.name}</Link>
                             </div>
                         ) : (
                             <div className='flex gap-4 items-center' >

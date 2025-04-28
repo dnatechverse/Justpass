@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { LoadingButton } from '../../components'
 
 const SignIN = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
     const API_URL = import.meta.env.VITE_API_URL
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        setLoading(true)
         try {
             const res = await fetch(`${API_URL}/api/public/signin`, {
                 method: 'POST',
@@ -23,7 +25,7 @@ const SignIN = () => {
 
             if (res.ok) {
                 localStorage.setItem('token', data.token)
-                alert('Sign in successful!')
+                //alert('Sign in successful!')
                 setEmail('')
                 setPassword('')
                 // Navigate to dashboard if needed
@@ -35,12 +37,14 @@ const SignIN = () => {
             console.error('Signin Error:', error)
             // console.log(password)
             alert('An error occurred. Please try again later.')
+        } finally {
+            setLoading(false)
         }
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+        <div className=" flex items-center justify-center  w-full h-full">
+            <div className="bg-white p-8 rounded-2xl shadow-xl  w-2/5 ">
                 <h2 className="text-4xl font-unboundedbold mb-6 text-center">Sign In</h2>
                 <form className="flex flex-col space-y-5 font-generalregular" onSubmit={handleSubmit}>
                     <div>
@@ -69,12 +73,11 @@ const SignIN = () => {
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        className="w-full bg-black text-white py-3 rounded-lg hover:bg-black transition duration-200"
-                    >
-                        Sign In
-                    </button>
+                    <LoadingButton
+                        loading={loading}
+                        className="w-full bg-black text-white py-3 rounded-lg hover:bg-black transition duration-200 cursor-pointer"
+                        text="Sign In"
+                    />
                 </form>
 
                 <div className="text-center mt-4 font-generalregular">

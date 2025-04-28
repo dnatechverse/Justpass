@@ -2,6 +2,7 @@ import images from "../../assets/images";
 
 const CourseData = [
     {
+        _id: "1",
         title: "Web Development",
         description: "Learn to build responsive websites and full-stack web applications using HTML, CSS, JavaScript, React, Node.js, Express, and MongoDB.",
         duration: "6 Months",
@@ -11,6 +12,7 @@ const CourseData = [
         img: images.WebDeveloper
     },
     {
+        _id: "2",
         title: "App Development",
         description: "Master mobile app development by creating powerful Android and iOS apps using React Native and Flutter.",
         duration: "5 Months",
@@ -20,6 +22,7 @@ const CourseData = [
         img: images.AppDevelopment
     },
     {
+        _id: "3",
         title: "Data Analyst",
         description: "Become a data analyst by learning how to collect, process, and visualize data using Excel, SQL, Python, and Power BI.",
         duration: "4 Months",

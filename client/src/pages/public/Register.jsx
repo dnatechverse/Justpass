@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { LoadingButton } from '../../components';
 
 const Register = () => {
+    const [loading, setLoading] = useState(false);
+
     const API_URL = import.meta.env.VITE_API_URL
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -21,8 +24,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData)
-        console.log(API_URL)
+        setLoading(true);
         try {
             const res = await fetch(`${API_URL}/api/public/register`, {
                 method: 'POST',
@@ -46,8 +48,9 @@ const Register = () => {
                     department: '',
                     password: ''
                 })
-                alert('Registration successful!')
+                //alert('Registration successful!')
                 navigate('/')  // Redirect to sign-in page
+                window.location.reload()  // Reload the page to reflect the new state
                 // Optionally navigate to dashboard or login
             } else {
                 alert(data.message || 'Registration failed')
@@ -55,13 +58,15 @@ const Register = () => {
         } catch (error) {
             console.error('Registration Error:', error)
             alert('An error occurred. Please try again later.')
+        } finally {
+            setLoading(false); // Stop loading after everything
         }
     }
 
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-3xl">
+        <div className="min-h-screen flex  justify-center ">
+            <div className="bg-white p-8 rounded-2xl shadow-xl w-full ">
                 <h2 className="text-4xl font-unboundedbold mb-6 text-center">Register</h2>
                 <form className="grid grid-cols-1 md:grid-cols-2 gap-6 font-generalregular " onSubmit={handleSubmit}>
                     <input type="text" name="name" placeholder="Full Name" required className={inputStyle} onChange={handleChange} value={formData.name} />
@@ -73,9 +78,12 @@ const Register = () => {
                     <input type="text" name="department" placeholder="Department" required className={inputStyle} onChange={handleChange} value={formData.department} />
                     <input type="password" name="password" placeholder="Password" required className={inputStyle} onChange={handleChange} value={formData.password} />
 
-                    <button type="submit" className="col-span-full bg-black text-white py-3 rounded-lg hover:bg-black transition duration-200">
-                        Register
-                    </button>
+                    <LoadingButton
+                        loading={loading}
+                        className="col-span-full bg-black text-white py-3 rounded-lg hover:bg-black transition duration-200 flex space-x-4 items-center justify-center font-generalregular cursor-pointer"
+                        text="Register"
+                    />
+
                 </form>
                 <p className=" text-end font-generalregular  text-gray-600 mt-4">
                     Already have an account? <Link to="/signin" className="text-black hover:underline">Sign in</Link>

@@ -17,10 +17,11 @@ const Footer = () => {
                         <div>
                             <h3 className='text-sm font-semibold mb-2'>Quick Links</h3>
                             <ul className='text-sm space-y-1'>
-                                <li><Link to='/about'>About Us</Link></li>
+                                <li><Link to='/'>Home</Link></li>
+                                <li><Link to='/about'>Why choose Us</Link></li>
                                 <li><Link to='/contact'>Contact</Link></li>
-                                <li><Link to='/terms'>Terms & Conditions</Link></li>
-                                <li><Link to='/policy'>Privacy Policy</Link></li>
+                                {/* <li><Link to='/terms'>Terms & Conditions</Link></li>
+                                <li><Link to='/policy'>Privacy Policy</Link></li> */}
                             </ul>
                         </div>
                         <div>
