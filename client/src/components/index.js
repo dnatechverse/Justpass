@@ -7,6 +7,7 @@ export { default as AuthHeader } from './global/Header';
 export { default as AuthFooter } from './global/Footer';
 export { default as LoadingButton } from './global/LoadingButton';
 export { default as ScrollToTop } from './global/ScrollToTop';
+export { default as Toast } from "./global/Toast";
 
 export { default as UserHeader } from './user/Header';
 export { default as UserFooter } from './user/Footer';

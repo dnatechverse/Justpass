@@ -3,7 +3,7 @@ import { AuthContext } from '../../contexts';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PublicCourseData } from '../../datasets';
 import axios from 'axios';
-import { EnrollmentPopup, LoadingButton } from '../../components';
+import { EnrollmentPopup, LoadingButton, Toast } from '../../components';
 
 const EnrollmentForm = () => {
     const { user } = useContext(AuthContext);
@@ -12,6 +12,11 @@ const EnrollmentForm = () => {
     const API_URL = import.meta.env.VITE_API_URL; // get the API URL from environment variables
     const [showPopup, setShowPopup] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [toastData, setToastData] = useState({
+        type: '', // 'success' or 'error'
+        messageTitle: '',
+        messageDesc: ''
+    });
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -30,7 +35,7 @@ const EnrollmentForm = () => {
                     const res = await axios.get(`${API_URL}/api/users/enrollment/one/${user.email}`);
                     if (res.data && res.data.length > 0) {
                         // Email exists in database
-                        setShowPopup(true); 
+                        setShowPopup(true);
                         // alert('You are already enrolled in a course!');
                     }
                 } catch (error) {
@@ -68,33 +73,77 @@ const EnrollmentForm = () => {
                 phone: '',
                 course: '',
             });
-            navigate('/'); // Redirect to home page after successful enrollment
-            window.location.reload(); // Reload the page to reflect changes
+            if (response.data) {
+                setToastData({
+                    type: 'success',
+                    messageTitle: 'Enrollment Successful',
+                    messageDesc: response.data.message,
+                });
+
+                setTimeout(() => {
+                    navigate('/');
+                    window.location.reload()  // Reload the page to reflect the new state
+                }, 3000);
+            } else {
+                setToastData({
+                    type: 'error',
+                    messageTitle: 'Enrollment Failed',
+                    messageDesc: response.data.message || 'Please try again.',
+                });
+            }
+            // navigate('/'); // Redirect to home page after successful enrollment
+            // window.location.reload(); // Reload the page to reflect changes
             // navigate('/success'); // Navigate after success (you can change the route)
         } catch (error) {
-            console.error('Enrollment error:', error);
-            alert(error.response?.data?.message || 'Something went wrong!');
+            setToastData({
+                type: 'error',
+                messageTitle: 'Enrollment Error',
+                messageDesc: error.response?.data?.message || 'Something went wrong!',
+            });
+            // console.error('Enrollment error:', error);
+            // alert(error.response?.data?.message || 'Something went wrong!');
         } finally {
             setLoading(false);
         }
     };
 
-      useEffect(() => {
-            if (showPopup) {
-                document.body.style.overflow = 'hidden'; // Disable scroll
-            } else {
-                document.body.style.overflow = 'auto';   // Enable scroll
-            }
-            
-            // Clean up when component unmounts
-            return () => {
-                document.body.style.overflow = 'auto';
-            };
-        }, [showPopup]);
+    useEffect(() => {
+        if (showPopup) {
+            document.body.style.overflow = 'hidden'; // Disable scroll
+        } else {
+            document.body.style.overflow = 'auto';   // Enable scroll
+        }
+
+        // Clean up when component unmounts
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [showPopup]);
+
+    useEffect(() => {
+        if (toastData.type) {
+            const timeout = setTimeout(() => {
+                setToastData({
+                    type: '',
+                    messageTitle: '',
+                    messageDesc: ''
+                });
+            }, 3000); // 3 seconds
+
+            return () => clearTimeout(timeout);
+        }
+    }, [toastData]);
 
     return (
         <div className="md:max-w-2/5 mx-auto mt-6 md:mt-0 md:p-8 md:px-12 md:bg-white md:shadow-md rounded-4xl  w-full">
-            {showPopup &&  <EnrollmentPopup /> }
+            {toastData.type && (
+                <Toast
+                    type={toastData.type}
+                    messageTitle={toastData.messageTitle}
+                    messageDesc={toastData.messageDesc}
+                />
+            )}
+            {showPopup && <EnrollmentPopup />}
             <h2 className="text-4xl font-unboundedbold font-bold mb-6 text-center">Enrollment Form</h2>
             <form onSubmit={handleSubmit} className="space-y-5 text-sm md:text-lg font-generalregular">
                 {/* Full Name */}
@@ -183,7 +232,7 @@ const EnrollmentForm = () => {
                 {/* Submit Button */}
                 <div>
                     <LoadingButton
-                        loading={loading} 
+                        loading={loading}
                         className="w-full  bg-black cursor-pointer text-white py-3 rounded-lg  transition-colors"
                         text="Submit"
                     />

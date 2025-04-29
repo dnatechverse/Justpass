@@ -9,10 +9,15 @@ import EnrollmentUser from "./public/enrollment/HarmonyandContrast.jpeg"
 
 import EmptyEnrollment from "./user/enrollment/VibrantStadiumatDawn.jpg" 
 
+import SuccessToast from "./public/toast/Success.jpeg"
+import ErrorToast from "./public/toast/Error.png"
+
 export default {
     GradientGirl, AboutTeam,
 
     WebDeveloper, DataAnalyst, AppDevelopment,
 
     EnrollmentUser, EmptyEnrollment,
+
+    SuccessToast, ErrorToast,
 }

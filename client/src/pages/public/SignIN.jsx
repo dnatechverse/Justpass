@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { LoadingButton } from '../../components'
+import { LoadingButton, Toast } from '../../components'
 
 const SignIN = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
+    const [toastData, setToastData] = useState({
+        type: '', // 'success' or 'error'
+        messageTitle: '',
+        messageDesc: ''
+    });
+
     const API_URL = import.meta.env.VITE_API_URL
 
 
@@ -24,26 +30,66 @@ const SignIN = () => {
             const data = await res.json()
 
             if (res.ok) {
+                setToastData({
+                    type: 'success',
+                    messageTitle: 'Signin Successful',
+                    messageDesc: 'Your account has been found.',
+                });
                 localStorage.setItem('token', data.token)
                 //alert('Sign in successful!')
                 setEmail('')
                 setPassword('')
                 // Navigate to dashboard if needed
+                setTimeout(() => {
+                    navigate('/');
+                    window.location.reload()  // Reload the page to reflect the new state
+                }, 3000);
             } else {
-                alert(data.message || 'Invalid credentials')
+                // alert(data.message || 'Invalid credentials')
+                setToastData({
+                    type: 'error',
+                    messageTitle: 'Invalid Credentials',
+                    messageDesc: data.message || 'Please try again.'
+                });
                 // console.log(password)
             }
         } catch (error) {
-            console.error('Signin Error:', error)
-            // console.log(password)
-            alert('An error occurred. Please try again later.')
+            setToastData({
+                type: 'error',
+                messageTitle: 'Something went wrong',
+                messageDesc: data.message || 'An error occurred. Please try again later.'
+            });
+            // console.error('Signin Error:', error)
+            // // console.log(password)
+            // alert('An error occurred. Please try again later.')
         } finally {
             setLoading(false)
         }
     }
 
+    useEffect(() => {
+        if (toastData.type) {
+            const timeout = setTimeout(() => {
+                setToastData({
+                    type: '',
+                    messageTitle: '',
+                    messageDesc: ''
+                });
+            }, 3000); // 3 seconds
+
+            return () => clearTimeout(timeout);
+        }
+    }, [toastData]);
+
     return (
         <div className=" flex items-center justify-center  w-full h-full">
+            {toastData.type && (
+                <Toast
+                    type={toastData.type}
+                    messageTitle={toastData.messageTitle}
+                    messageDesc={toastData.messageDesc}
+                />
+            )}
             <div className="md:bg-white md:p-8 rounded-2xl md:shadow-xl w-full mt-4 md:mt-0  md:w-2/5 ">
                 <h2 className="text-4xl font-unboundedbold mb-6 text-center">Sign In</h2>
                 <form className="flex flex-col space-y-5 font-generalregular" onSubmit={handleSubmit}>

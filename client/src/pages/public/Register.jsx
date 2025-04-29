@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { LoadingButton } from '../../components';
+import { LoadingButton, Toast } from '../../components';
 
 const Register = () => {
     const [loading, setLoading] = useState(false);
+    const [toastData, setToastData] = useState({
+        type: '', // 'success' or 'error'
+        messageTitle: '',
+        messageDesc: ''
+    });
+
 
     const API_URL = import.meta.env.VITE_API_URL
     const navigate = useNavigate();
@@ -37,6 +43,11 @@ const Register = () => {
             const data = await res.json()
 
             if (res.ok) {
+                setToastData({
+                    type: 'success',
+                    messageTitle: 'Registration Successful',
+                    messageDesc: 'Your account has been created.'
+                });
                 localStorage.setItem('token', data.token)  // Save token to localStorage
                 setFormData({
                     name: '',
@@ -48,24 +59,57 @@ const Register = () => {
                     department: '',
                     password: ''
                 })
+
+                setTimeout(() => {
+                    navigate('/');
+                    window.location.reload()  // Reload the page to reflect the new state
+                }, 3000);
+
                 //alert('Registration successful!')
-                navigate('/')  // Redirect to sign-in page
-                window.location.reload()  // Reload the page to reflect the new state
+                // navigate('/')  // Redirect to sign-in page
                 // Optionally navigate to dashboard or login
             } else {
-                alert(data.message || 'Registration failed')
+                setToastData({
+                    type: 'error',
+                    messageTitle: 'Registration Failed',
+                    messageDesc: data.message || 'Please try again.'
+                });
             }
         } catch (error) {
-            console.error('Registration Error:', error)
-            alert('An error occurred. Please try again later.')
+            setToastData({
+                type: 'error',
+                messageTitle: 'Error',
+                messageDesc: 'An error occurred. Please try again later.'
+            });
         } finally {
             setLoading(false); // Stop loading after everything
         }
     }
 
+    useEffect(() => {
+        if (toastData.type) {
+            const timeout = setTimeout(() => {
+                setToastData({
+                    type: '',
+                    messageTitle: '',
+                    messageDesc: ''
+                });
+            }, 3000); // 3 seconds
+
+            return () => clearTimeout(timeout);
+        }
+    }, [toastData]);
 
     return (
         <div className="min-h-full flex  justify-center w-full">
+            {toastData.type && (
+                <Toast
+                    type={toastData.type}
+                    messageTitle={toastData.messageTitle}
+                    messageDesc={toastData.messageDesc}
+                />
+            )}
+
             <div className="md:bg-white md:w-3/5 md:p-8 rounded-2xl md:shadow-xl w-full mt-4 md:mt-0 ">
                 <h2 className="text-4xl font-unboundedbold mb-6 text-center">Register</h2>
                 <form className="grid grid-cols-1 md:grid-cols-2 gap-y-3 md:gap-6 font-generalregular " onSubmit={handleSubmit}>
